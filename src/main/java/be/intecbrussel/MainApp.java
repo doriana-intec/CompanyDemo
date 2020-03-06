@@ -1,23 +1,25 @@
 package be.intecbrussel;
 
 import be.intecbrussel.custom_exception.CustomException;
-import be.intecbrussel.dao.implementations.EmployeeDaoImpl;
-import be.intecbrussel.dao.interfaces.Dao;
 import be.intecbrussel.model.Company;
 import be.intecbrussel.model.Employee;
-import be.intecbrussel.service.CompanyServiceImpl;
+import be.intecbrussel.service.service_implementation.CompanyServiceImpl;
+import be.intecbrussel.service.service_implementation.EmployeeServiceImpl;
+import be.intecbrussel.service.service_interfaces.CompanyService;
 
 public class MainApp {
     public static void main(String[] args) {
 
-        CompanyServiceImpl companyService = new CompanyServiceImpl();
-        Dao<Employee> employeeDao = new EmployeeDaoImpl();
+        CompanyService companyService = new CompanyServiceImpl();
+        EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
+        Company company;
 
         try {
-//            dao.create(new Company("intec"));
-//            System.out.println(dao.createAndReturnCompany(new Company("moktok")));
-        Company company = companyService.createAndReturnCompany(new Company("Company name"));
-        employeeDao.create(new Employee("smth","smth",company));
+            companyService.create(new Company("intec"));
+            company = companyService.createAndReturnCompany(new Company("Company name"));
+
+            employeeService.create(new Employee("smth", "smth", company));
+            employeeService.getList().forEach(System.out::println);
 
         } catch (CustomException e) {
             e.printStackTrace();
