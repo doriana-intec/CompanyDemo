@@ -7,6 +7,10 @@ public class Employee {
     private String jobTitle;
     private Company company;
 
+    public Employee() {
+
+    }
+
     public Employee(String name, String jobTitle, Company company) {
         this.name = name;
         this.jobTitle = jobTitle;
